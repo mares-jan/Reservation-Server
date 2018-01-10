@@ -17,7 +17,6 @@ public class CustomEntryPoint extends BasicAuthenticationEntryPoint {
             final HttpServletResponse response,
             final AuthenticationException authException) throws IOException, ServletException {
         //Authentication failed, send error response.
-        System.out.println("Realm fucked up");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.addHeader("WWW-Authenticate", "Basic hhhhhh realm=" + getRealmName() + "");
         PrintWriter writer = response.getWriter();

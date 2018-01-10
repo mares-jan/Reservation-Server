@@ -35,7 +35,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //Security configuration
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        System.out.println("config");
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("login","reservations").hasAnyAuthority("USER", "ADMIN")
@@ -49,7 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //Cross origin configuration
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
-        System.out.println("bean config");
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:8383"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT"));

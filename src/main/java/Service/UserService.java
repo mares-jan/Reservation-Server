@@ -28,8 +28,7 @@ public class UserService implements UserDetailsService {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final String DATABASE_URL = "jdbc:derby:\\MyDB\\demo;";
     private Dao<User, Integer> dao;
-    
-   
+
     public UserService() {
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(DATABASE_URL);
@@ -38,8 +37,8 @@ public class UserService implements UserDetailsService {
             LOG.log(Level.SEVERE, null, ex);
         }
     }
-    
-        public User getUserById(int userId) throws StatusException {
+
+    public User getUserById(int userId) throws StatusException {
         try {
             User user = dao.queryForId(userId);
             if (user == null) {
@@ -53,8 +52,8 @@ public class UserService implements UserDetailsService {
             throw new StatusException(HttpStatus.FORBIDDEN);
         }
     }
-        
-            public ArrayList<User> getUsers() throws StatusException {
+
+    public ArrayList<User> getUsers() throws StatusException {
         ArrayList<User> users = new ArrayList<>();
         try {
             users = (ArrayList<User>) dao.queryForAll();
@@ -71,11 +70,8 @@ public class UserService implements UserDetailsService {
             throw new StatusException(HttpStatus.FORBIDDEN);
         }
     }
-    
 
     public User getUserByUsername(String username) throws StatusException {
-        LOG.log(Level.INFO, null, "login");
-
         ArrayList<User> users = new ArrayList<>();
         try {
             users = (ArrayList<User>) dao.queryBuilder().where().eq("username", username).query();
